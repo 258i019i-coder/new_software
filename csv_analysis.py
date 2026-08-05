@@ -95,13 +95,17 @@ for dataset in acs_list:
             how="outer"
         )
 
-# print(acs_summary)
-# print(crime_summary)
 
+## 最後に，headerにcrime_summaryとacs_summaryを横結合
 header = pd.read_csv("header.csv")
 
+chicago = pd.merge(header, crime_summary, on = ["year", "community_area"],
+                   how = "left")
 
+chicago = pd.merge(chicago, acs_summary, 
+                   on = ["year", "community_area"],
+                   how = "left")
 
-
+chicago.to_csv("chicago.csv", index = False)
 
 
