@@ -1,3 +1,5 @@
+[![Python test](https://github.com/258i019i-coder/new_software/actions/workflows/test.yml/badge.svg)](https://github.com/258i019i-coder/new_software/actions/workflows/test.yml)
+
 # Chicago Crime Analysis
 
 ## 概要
