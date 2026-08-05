@@ -7,7 +7,8 @@ authors = [
     { name = "258i019i-coder", email = "258i019i@gsuite.kobe-u.ac.jp" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = ["pandas",
+    "matplotlib"]
 
 [project.scripts]
 new-software = "new_software:main"
