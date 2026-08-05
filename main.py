@@ -31,6 +31,7 @@ def main():
         chicago
         )
 
+    return chicago
 
 if __name__ == "__main__":
     main()
