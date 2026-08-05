@@ -1,7 +1,7 @@
 # Chicago Crime Analysis
 
 ## 概要
-　米国Illinois州Chicago市の犯罪認知件数データとACS人口統計データ(2020-2024)を結合し、Chicago市内77のcommunity area × year単位の時系列データセットおよび折れ線グラフを自動作成するものである。
+　米国Illinois州Chicago市の犯罪認知件数データとACS人口統計データ(2020-2024)を結合し、Chicago市内77のcommunity area × year単位の時系列データセットおよび折れ線グラフを自動作成するものである。折れ線グラフの作成時，ユーザーは最大5つの変数を選択可能である。
 
 　犯罪は暴力犯`violent1`，財産犯`property1`，風紀犯`public_order1`，その他`other1`の4類型である。
 
