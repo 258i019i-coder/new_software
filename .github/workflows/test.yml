@@ -1,0 +1,46 @@
+name: Python test
+
+# pushやpull requestされた時に実行
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  test:
+
+    # GitHub側のLinux環境で実行
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # リポジトリを取得
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      # Pythonを準備
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      # uvをインストール
+      - name: Install uv
+        run: pip install uv
+
+
+      # 依存関係をインストール
+      - name: Install dependencies
+        run: uv sync
+
+
+      # pytest実行
+      - name: Run tests
+        run: uv run pytest
