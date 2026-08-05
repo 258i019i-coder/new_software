@@ -1,7 +1,7 @@
 from crime import create_crime_summary
 from acs import create_acs_summary
 from merge import create_chicago
-
+from visualization import plot_chicago
 
 def main():
 
@@ -24,6 +24,12 @@ def main():
     )
 
     print("Chicago dataset created.")
+
+
+    # 5. グラフ描画
+    plot_chicago(
+        chicago
+        )
 
 
 if __name__ == "__main__":
