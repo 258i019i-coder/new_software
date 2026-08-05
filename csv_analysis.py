@@ -2,7 +2,9 @@ import numpy as np
 import pandas as pd
 import matplotlib
 import geopandas as gpd
-
+import subprocess
+import re
+import os
 
 # まずは，crime のデータに分類辞書を結合する
 
@@ -40,6 +42,66 @@ crime_summary = (
 )
 
 
-print(crime_summary)
+### 次に，ACSのデータをcommunity_areaごとに集計
+
+# データセットの読み込み，リポジトリよりファイルを抽出
+# Git管理されている _2020-2024.csv ファイルを取得
+files = subprocess.check_output(
+    ["git", "ls-files", "*_2020-2024.csv"],
+    text=True
+).splitlines()
+
+# ACS_ と _2020-2024.csv の間を抽出
+acs_list = [
+    re.search(r"ACS(.*?)_2020-2024\.csv", f).group(1)
+    for f in files
+    if re.search(r"ACS(.*?)_2020-2024\.csv", f)
+]
+
+acs_summary = None
+
+for dataset in acs_list:
+
+    # 読み込み
+    df1 = pd.read_csv(f"ACS{dataset}_2020-2024.csv")
+    
+    # 後ろ10列を除外
+    sum_cols = df1.columns[:-10]
+
+    # グループキーを除外
+    sum_cols = [
+        col for col in sum_cols
+        if col not in ["year", "community_area"]
+    ]
+
+    # year × community_areaで集計
+    result = (
+        df1.groupby(
+            ["year", "community_area"],
+            as_index=False
+        )[sum_cols]
+        .sum()
+    )
+
+
+    # 横結合
+    if acs_summary is None:
+        acs_summary = result
+    else:
+        acs_summary = pd.merge(
+            acs_summary,
+            result,
+            on=["year", "community_area"],
+            how="outer"
+        )
+
+# print(acs_summary)
+# print(crime_summary)
+
+header = pd.read_csv("header.csv")
+
+
+
+
 
 
