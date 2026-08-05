@@ -30,8 +30,16 @@ crime_merge.insert(2, "crime_group1_prime", col)
 crime_merge.rename(columns = {"crime_group1_prime" : "crimetype"}, inplace = True)
 
 
+# 最後に，年別，コミュニティエリア別の集計表を作る
+crime_summary = (
+    crime_merge
+    .groupby(["year", "community_area", "crimetype"])
+    .size()
+    .unstack(fill_value=0)
+    .reset_index()
+)
 
 
-print(crime_merge)
+print(crime_summary)
 
 
