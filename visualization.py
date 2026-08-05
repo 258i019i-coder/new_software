@@ -46,7 +46,7 @@ def plot_chicago(
 
             area = int(
                 input(
-                    "Community Areaを入力してください（1〜77）: "
+                    "Community Area番号(1～77までの整数)を入力してください: "
                 )
             )
 
