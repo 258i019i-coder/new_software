@@ -1,5 +1,5 @@
-from crime_clean import create_crime_summary
-from acs_clean import create_acs_summary
+from crime import create_crime_summary
+from acs import create_acs_summary
 from merge import create_chicago
 
 
